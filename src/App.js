@@ -4,9 +4,10 @@ import { LoginScreen } from "./pages/login";
 import { Header } from "./components/Header.component";
 
 function App() {
+  const login = "";
   return (
     <>
-      <Header title={""} username={""}></Header>
+      <Header title={"Welcome to BILAZONE"} username={login}></Header>
       <LoginScreen></LoginScreen>
     </>
   );

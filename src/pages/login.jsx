@@ -1,23 +1,30 @@
 import React from "react";
+import { connect } from "react-redux";
+import { loginAction } from "../store/actions";
 
-export class LoginScreen extends React.Component {
+class _LoginScreen extends React.Component {
   state = {
     disabled: true,
     login: "davyengone",
-    password: "mlerjeazkfjksmdqj897P",
+    password: "dmafdkld",
   };
 
-  componentDidUpdate() {
-    console.log("", this.state);
-    if (this.state.disabled && this.state.login && this.state.password) {
-      this.setState({ disabled: false });
-    }
-  }
+  save = (event) => {
+    event.preventDefault();
+    this.props.save(this.state.login);
+  };
+
+  reset = (event) => {
+    event.preventDefault();
+    this.setState({ login: "", password: "" });
+    localStorage.clear();
+  };
+
   render() {
     const { disabled, login, password } = this.state;
     return (
       <form>
-        <h2>Login To Browse our shop!</h2>
+        <h2>Login To Browse our shop! {this.props.login}</h2>
         <div className="control">
           <div>
             <label>Login: </label>
@@ -25,11 +32,7 @@ export class LoginScreen extends React.Component {
           <input
             placeholder="your login..."
             value={login}
-            onChange={(event) =>
-              this.setState((state) => {
-                return { login: event.target.value };
-              })
-            }
+            onChange={(event) => this.setState({ login: event.target.value })}
           />
           <div className="errors">
             {/* <span>Login is required!</span> */}
@@ -53,9 +56,29 @@ export class LoginScreen extends React.Component {
                 <span>Password should be at least 8 characters</span> */}
           </div>
         </div>
-        <button disabled={disabled}>Save</button>
-        <button>Reset</button>
+        <button onClick={this.save}>Save</button>
+        <button onClick={this.reset}>Reset</button>
       </form>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    login: state.auth.login, // this.props.login
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    save: (login) => {
+      // this.props.save
+      dispatch(loginAction(login));
+    },
+  };
+}
+
+export const LoginScreen = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_LoginScreen);
