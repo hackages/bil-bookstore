@@ -1,8 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutAction } from "../store/actions";
 
 export const Header = ({ title, username }) => {
   const login = useSelector((state) => state.auth.login);
+  const dispatch = useDispatch();
+
+  function logout() {
+    localStorage.clear();
+    // dispatch(logoutAction());
+  }
 
   if (!login) {
     return null;
@@ -18,7 +25,7 @@ export const Header = ({ title, username }) => {
         </div>
         <div className="userinfo">
           <span>{username}</span>
-          <button click="logout()">Logout</button>
+          <button onClick={logout}>Logout</button>
         </div>
       </header>
       <hr />

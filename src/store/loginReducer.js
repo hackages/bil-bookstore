@@ -1,13 +1,20 @@
-import { LOGIN } from "./actions";
+import { LOGIN, LOGOUT } from "./actions";
 
 const initialState = {
   login: "",
 };
-export function loginReducer(state = initialState, action) {
+export function authReducer(state = initialState, action) {
   if (action.type === LOGIN) {
     return {
       ...state,
       login: action.payload.login,
+    };
+  }
+
+  if (action.type === LOGOUT) {
+    return {
+      ...state,
+      login: "",
     };
   }
 
