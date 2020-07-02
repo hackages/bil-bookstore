@@ -42,6 +42,9 @@ Localstorage: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStora
       <Route path="/">
         <DashboardScreen></DashboardScreen>
       </Route>
+      <Route path="/books">
+        <BookStore></BookStore>
+      </Route>
     </Switch>
   </Router>
 </>

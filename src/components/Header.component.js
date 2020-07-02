@@ -1,17 +1,20 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import { logoutAction } from "../store/actions";
 
 export const Header = ({ title, username }) => {
-  const login = useSelector((state) => state.auth.login);
+  const showHeader = useSelector((state) => state.ui.showHeader);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   function logout() {
     localStorage.clear();
-    // dispatch(logoutAction());
+    dispatch(logoutAction());
+    history.push("login");
   }
 
-  if (!login) {
+  if (!showHeader) {
     return null;
   }
 
@@ -20,8 +23,8 @@ export const Header = ({ title, username }) => {
       <header>
         <h1>{title}</h1>
         <div>
-          <a routerLink="books">Books</a>
-          <a routerLink="laptops">Laptops</a>
+          <Link to="books">Books</Link>
+          <Link to="laptops">Laptops</Link>
         </div>
         <div className="userinfo">
           <span>{username}</span>

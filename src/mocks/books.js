@@ -1,4 +1,4 @@
-export const books = [
+const books = [
   { id: 1887, title: "Angular up", category: "web" },
   { id: 2897, title: "NativeScript in Action", category: "mobile" },
   { id: 8370, title: "Using React & Redux", category: "web" },
@@ -25,3 +25,20 @@ export const books = [
     category: "programming language",
   },
 ];
+
+export const getBooks = () => {
+  return new Promise((resolve) => {
+    resolve(books);
+  });
+};
+export const getBookById = (id) => {
+  return new Promise((resolve, reject) => {
+    const results = books.filter((book) => book.id === parseInt(id));
+
+    if (results) {
+      resolve(results[0]);
+    } else {
+      reject({ message: `Book with id ${id} does not exist` });
+    }
+  });
+};

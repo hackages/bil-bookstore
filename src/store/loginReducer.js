@@ -2,6 +2,7 @@ import { LOGIN, LOGOUT } from "./actions";
 
 const initialState = {
   login: "",
+  showHeader: false,
 };
 export function authReducer(state = initialState, action) {
   if (action.type === LOGIN) {

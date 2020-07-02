@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../store/actions";
+import { useHistory } from "react-router-dom";
 
 export function LoginScreen() {
   const initaltate = {
@@ -11,12 +12,14 @@ export function LoginScreen() {
 
   const login = useSelector((state) => state.auth.login);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [state, setState] = useState(initaltate);
 
   const save = (event) => {
     event.preventDefault();
     dispatch(loginAction(state.login));
+    history.push("dashboard");
   };
 
   const reset = (event) => {
@@ -58,7 +61,7 @@ export function LoginScreen() {
                 <span>Password should be at least 8 characters</span> */}
         </div>
       </div>
-      <button onClick={save}>Save</button>
+      <button onClick={save}>Login</button>
       <button onClick={reset}>Reset</button>
     </form>
   );
