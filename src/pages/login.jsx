@@ -1,84 +1,65 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../store/actions";
 
-class _LoginScreen extends React.Component {
-  state = {
+export function LoginScreen() {
+  const initaltate = {
     disabled: true,
     login: "davyengone",
     password: "dmafdkld",
   };
 
-  save = (event) => {
+  const login = useSelector((state) => state.auth.login);
+  const dispatch = useDispatch();
+
+  const [state, setState] = useState(initaltate);
+
+  const save = (event) => {
     event.preventDefault();
-    this.props.save(this.state.login);
+    dispatch(loginAction(state.login));
   };
 
-  reset = (event) => {
+  const reset = (event) => {
     event.preventDefault();
-    this.setState({ login: "", password: "" });
+    setState({ login: "", password: "" });
     localStorage.clear();
   };
 
-  render() {
-    const { disabled, login, password } = this.state;
-    return (
-      <form>
-        <h2>Login To Browse our shop! {this.props.login}</h2>
-        <div className="control">
-          <div>
-            <label>Login: </label>
-          </div>
-          <input
-            placeholder="your login..."
-            value={login}
-            onChange={(event) => this.setState({ login: event.target.value })}
-          />
-          <div className="errors">
-            {/* <span>Login is required!</span> */}
-            {/* <span>Login should be a valid email address</span> */}
-          </div>
+  const { disabled, password } = state;
+  return (
+    <form>
+      <h2>Login To Browse our shop! {login}</h2>
+      <div className="control">
+        <div>
+          <label>Login: </label>
         </div>
-        <div className="control">
-          <div>
-            <label>Password: </label>
-          </div>
-          <input
-            placeholder="your password..."
-            type="password"
-            value={password}
-            onChange={(event) =>
-              this.setState({ password: event.target.value })
-            }
-          />
-          <div className="errors">
-            {/* <span>Password is required!</span>
+        <input
+          placeholder="your login..."
+          value={state.login}
+          onChange={(event) => setState({ login: event.target.value })}
+        />
+        <div className="errors">
+          {/* <span>Login is required!</span> */}
+          {/* <span>Login should be a valid email address</span> */}
+        </div>
+      </div>
+      <div className="control">
+        <div>
+          <label>Password: </label>
+        </div>
+        <input
+          placeholder="your password..."
+          type="password"
+          value={password}
+          onChange={(event) => setState({ password: event.target.value })}
+        />
+        <div className="errors">
+          {/* <span>Password is required!</span>
                 <span>Password should be at least 8 characters</span> */}
-          </div>
         </div>
-        <button onClick={this.save}>Save</button>
-        <button onClick={this.reset}>Reset</button>
-      </form>
-    );
-  }
+      </div>
+      <button onClick={save}>Save</button>
+      <button onClick={reset}>Reset</button>
+    </form>
+  );
 }
-
-function mapStateToProps(state) {
-  return {
-    login: state.auth.login, // this.props.login
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    save: (login) => {
-      // this.props.save
-      dispatch(loginAction(login));
-    },
-  };
-}
-
-export const LoginScreen = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(_LoginScreen);
