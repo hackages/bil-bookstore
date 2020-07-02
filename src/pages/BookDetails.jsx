@@ -1,0 +1,23 @@
+import React from "react";
+
+const BookDetails = () => (
+  <form formGroup="form">
+    <h2>{book.title}</h2>
+    <div class="control">
+      <div class="label">
+        <label>Id: </label>
+      </div>
+      <input disabled value="book.id" />
+    </div>
+    <div class="control">
+      <div class="label">
+        <label>Title: </label>
+      </div>
+      <input formControlName="title" placeholder="title" />
+    </div>
+    <div class="control">
+      <button click="save()">Save</button>
+      <button click="goBack()">Back</button>
+    </div>
+  </form>
+);

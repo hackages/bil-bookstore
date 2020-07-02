@@ -1,0 +1,16 @@
+import React from "react";
+
+export const DashboardScreen = () => (
+  <div class="container">
+    <a routerLink="books" class="item">
+      <div class="module hero">
+        <h4>BookStore</h4>
+      </div>
+    </a>
+    <a routerLink="['/laptops']" class="item">
+      <div class="module hero">
+        <h4>LaptopStore</h4>
+      </div>
+    </a>
+  </div>
+);
