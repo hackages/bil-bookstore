@@ -1,68 +1,65 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Building our Books & Laptops Store
 
-## Available Scripts
+### Instructions & Guides
 
-In the project directory, you can run:
+#### 1. Implement the LoginScreen
 
-### `yarn start`
+- User should enter an email (required) and a password (required)
+- When the user clicks on the Save button, save the login information in the LocalStorage
+- When the user clicks on the Reset button, clear the form entirely
+- Disable the Header when we are on the LoginScreen
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  - 1. With localStorage
+  - 2. (Bonus) Disable the Header button using the Context in React
+  - 3. (Bonus) Disable the Header button using Redux
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Implement the logout button: When clicking on it, clear the localStorage and navigate to the login page
 
-### `yarn test`
+##### Help:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Localstorage: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 
-### `yarn build`
+##### Bonus
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Use Formik to manage the validations of the LoginScreen (https://jaredpalmer.com/formik/docs/overview)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### 2. Add navigations to the application
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Setup the routing in your application: https://reacttraining.com/react-router/web/guides/quick-start
+- Add the following code in your App.js
 
-### `yarn eject`
+```javascript
+<>
+  <Router>
+    <Header title={""} username={""}></Header>
+    <Switch>
+      <Route path="/login">
+        <LoginScreen></LoginScreen>
+      </Route>
+      <Route path="/dashboard">
+        <DashboardScreen></DashboardScreen>
+      </Route>
+      <Route path="/">
+        <DashboardScreen></DashboardScreen>
+      </Route>
+    </Switch>
+  </Router>
+</>
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### 3. Implement the Dashboard Screen
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Display the list of stores (books store & laptops store)
+- When clicking on a store, It should navigate to that store page (start with the BookStore)
+- Display the Header Component when you are on the Dashboard Screen
+- Add Protected routes: Prevent users to access this page if they're not logged in
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### 4. Implement the BookStore Screen
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### 5. Implement the BookDetails Screen
 
-## Learn More
+#### 6. Implement the LaptopStore Screen
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### 7. Implement the LaptopDetails Screen
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+#### 8. Add Testing to your application
